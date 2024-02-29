@@ -1,5 +1,5 @@
 import 'package:doctor_booking/core/routing/routes.dart';
-import 'package:doctor_booking/features/auth/ui/login_screen.dart';
+import 'package:doctor_booking/features/auth/login/ui/login_screen.dart';
 import 'package:doctor_booking/features/onboarding/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 
