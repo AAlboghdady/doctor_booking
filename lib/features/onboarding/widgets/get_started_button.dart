@@ -3,8 +3,6 @@ import 'package:doctor_booking/core/routing/routes.dart';
 import 'package:doctor_booking/core/theming/colors.dart';
 import 'package:doctor_booking/core/theming/styles.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class GetStartedButton extends StatelessWidget {
   const GetStartedButton({super.key});
@@ -18,7 +16,9 @@ class GetStartedButton extends StatelessWidget {
       style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all(ColorsManager.mainBlue),
           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-          minimumSize: MaterialStateProperty.all(Size(double.infinity, 52)),
+          minimumSize: MaterialStateProperty.all(
+            const Size(double.infinity, 52),
+          ),
           shape: MaterialStateProperty.all(
             RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),

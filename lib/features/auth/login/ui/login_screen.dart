@@ -2,10 +2,14 @@ import 'package:doctor_booking/core/helpers/spacing.dart';
 import 'package:doctor_booking/core/theming/styles.dart';
 import 'package:doctor_booking/core/widgets/app_text_button.dart';
 import 'package:doctor_booking/core/widgets/app_text_form_field.dart';
+import 'package:doctor_booking/features/auth/login/data/models/login_request_body.dart';
+import 'package:doctor_booking/features/auth/login/logic/cubit/login_cubit.dart';
 import 'package:doctor_booking/features/auth/login/ui/widgets/already_have_account_text.dart';
+import 'package:doctor_booking/features/auth/login/ui/widgets/email_and_password.dart';
+import 'package:doctor_booking/features/auth/login/ui/widgets/login_bloc_listener.dart';
 import 'package:doctor_booking/features/auth/login/ui/widgets/terms_and_conditions_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -39,46 +43,31 @@ class _LoginScreenState extends State<LoginScreen> {
                   style: TextStyles.font14GrayRegular,
                 ),
                 verticalSpace(36),
-                Form(
-                  key: formKey,
-                  child: Column(
-                    children: [
-                      const AppTextFormField(hintText: 'Email'),
-                      verticalSpace(16),
-                      AppTextFormField(
-                        hintText: 'Password',
-                        isObscureText: isObscureText,
-                        suffixIcon: GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              isObscureText = !isObscureText;
-                            });
-                          },
-                          child: Icon(isObscureText
-                              ? Icons.visibility_off
-                              : Icons.visibility),
-                        ),
+                Column(
+                  children: [
+                    const EmailAndPassword(),
+                    verticalSpace(24),
+                    Align(
+                      alignment: AlignmentDirectional.centerEnd,
+                      child: Text(
+                        'Forgot Password?',
+                        style: TextStyles.font13BlueRegular,
                       ),
-                      verticalSpace(24),
-                      Align(
-                        alignment: AlignmentDirectional.centerEnd,
-                        child: Text(
-                          'Forgot Password?',
-                          style: TextStyles.font13BlueRegular,
-                        ),
-                      ),
-                      verticalSpace(40),
-                      AppTextButton(
-                        buttonText: 'Login',
-                        textStyle: TextStyles.font16WhiteSemiBold,
-                        onPressed: () {},
-                      ),
-                      verticalSpace(16),
-                      TermsAndConditionsText(),
-                      verticalSpace(60),
-                      AlreadyHaveAccountText(),
-                    ],
-                  ),
+                    ),
+                    verticalSpace(40),
+                    AppTextButton(
+                      buttonText: 'Login',
+                      textStyle: TextStyles.font16WhiteSemiBold,
+                      onPressed: () {
+                        validateThenDoLogin(context);
+                      },
+                    ),
+                    verticalSpace(16),
+                    const TermsAndConditionsText(),
+                    verticalSpace(60),
+                    const AlreadyHaveAccountText(),
+                    const LoginBlocListener()
+                  ],
                 ),
               ],
             ),
@@ -86,5 +75,15 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+  }
+
+  void validateThenDoLogin(BuildContext context) {
+    if (context.read<LoginCubit>().formKey.currentState!.validate()) {
+      context.read<LoginCubit>().emitLoginStates(
+            LoginRequestBody(
+                email: context.read<LoginCubit>().emailController.text,
+                password: context.read<LoginCubit>().passwordController.text),
+          );
+    }
   }
 }
