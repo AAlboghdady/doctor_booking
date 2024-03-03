@@ -1,7 +1,6 @@
 import 'package:doctor_booking/core/helpers/spacing.dart';
 import 'package:doctor_booking/core/theming/styles.dart';
 import 'package:doctor_booking/core/widgets/app_text_button.dart';
-import 'package:doctor_booking/core/widgets/app_text_form_field.dart';
 import 'package:doctor_booking/features/auth/login/data/models/login_request_body.dart';
 import 'package:doctor_booking/features/auth/login/logic/cubit/login_cubit.dart';
 import 'package:doctor_booking/features/auth/login/ui/widgets/already_have_account_text.dart';
@@ -12,15 +11,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class LoginScreen extends StatelessWidget {
+  LoginScreen({super.key});
 
-  @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
   final formKey = GlobalKey<FormState>();
+
   bool isObscureText = true;
 
   @override
