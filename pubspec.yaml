@@ -47,7 +47,9 @@ dependencies:
   
   # for dependacy injection
   get_it: ^7.6.7
-
+  
+  # A build system for Dart code generation and modular compilation.
+  build_runner: ^2.4.8
   # Automatically generate code for converting to and from JSON by annotating Dart classes.
   json_serializable: ^6.7.1
   # Annotations for the json_serializable code-generator. 
