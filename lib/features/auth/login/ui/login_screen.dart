@@ -12,11 +12,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LoginScreen extends StatelessWidget {
-  LoginScreen({super.key});
-
-  final formKey = GlobalKey<FormState>();
-
-  bool isObscureText = true;
+  const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +47,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                     verticalSpace(40),
                     AppTextButton(
-                      buttonText: 'Login',
+                      buttonText: "Login",
                       textStyle: TextStyles.font16WhiteSemiBold,
                       onPressed: () {
                         validateThenDoLogin(context);
@@ -61,7 +57,7 @@ class LoginScreen extends StatelessWidget {
                     const TermsAndConditionsText(),
                     verticalSpace(60),
                     const AlreadyHaveAccountText(),
-                    const LoginBlocListener()
+                    const LoginBlocListener(),
                   ],
                 ),
               ],
@@ -76,8 +72,9 @@ class LoginScreen extends StatelessWidget {
     if (context.read<LoginCubit>().formKey.currentState!.validate()) {
       context.read<LoginCubit>().emitLoginStates(
             LoginRequestBody(
-                email: context.read<LoginCubit>().emailController.text,
-                password: context.read<LoginCubit>().passwordController.text),
+              email: context.read<LoginCubit>().emailController.text,
+              password: context.read<LoginCubit>().passwordController.text,
+            ),
           );
     }
   }
